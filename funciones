@@ -1,0 +1,54 @@
+package com.mycompany.triangulo;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author Citla ZG
+ */
+public class Triangulooo {
+    public static void main(String[] args) {
+        double x1 = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la coordenada x del primer vértice:"));
+        double y1 = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la coordenada y del primer vértice:"));
+        double x2 = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la coordenada x del segundo vértice:"));
+        double y2 = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la coordenada y del segundo vértice:"));
+        double x3 = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la coordenada x del tercer vértice:"));
+        double y3 = Double.parseDouble(JOptionPane.showInputDialog("Ingrese la coordenada y del tercer vértice:"));
+
+        // Calcular longitudes de los lados del triángulo
+        double lado1 = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        double lado2 = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
+        double lado3 = Math.sqrt(Math.pow(x1 - x3, 2) + Math.pow(y1 - y3, 2));
+        
+        // Determinar tipo de triángulo
+        String tipoTriangulo;
+        if (lado1 == lado2 && lado2 == lado3) {
+            tipoTriangulo = "Equilátero";
+        } else if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) {
+            tipoTriangulo = "Isósceles";
+        } else {
+            tipoTriangulo = "Escaleno";
+        }
+        
+        // Calcular perímetro
+        double perimetro = lado1 + lado2 + lado3;
+        
+        // Calcular área usando la fórmula de Herón
+        double semiperimetro = perimetro / 2;
+        double area = Math.sqrt(semiperimetro * (semiperimetro - lado1) * (semiperimetro - lado2) * (semiperimetro - lado3));
+        
+        // Calcular ángulos usando la ley de cosenos
+        double angulo1 = Math.toDegrees(Math.acos((lado2*lado2 + lado3*lado3 - lado1*lado1) / (2*lado2*lado3)));
+        double angulo2 = Math.toDegrees(Math.acos((lado1*lado1 + lado3*lado3 - lado2*lado2) / (2*lado1*lado3)));
+        double angulo3 = Math.toDegrees(Math.acos((lado1*lado1 + lado2*lado2 - lado3*lado3) / (2*lado1*lado2)));
+        
+        // Mostrar resultados en cuadros de diálogo
+        String mensaje = "El triángulo es de tipo: " + tipoTriangulo + "\n"
+                       + "Perímetro: " + perimetro + "\n"
+                       + "Área: " + area + "\n"
+                       + "Ángulo 1: " + angulo1 + "\n"
+                       + "Ángulo 2: " + angulo2 + "\n"
+                       + "Ángulo 3: " + angulo3;
+        
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+}
